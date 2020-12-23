@@ -960,7 +960,8 @@ static char *internal_readline(tinyrl_t * this,
 			key = tinyrl_getchar(this);
 
 			/* Error || EOF || Timeout */
-			if (key < 0) {
+			if (key < 0 ||
+			    (key == KEY_EOT && this->end == 0) /* ^D signal to exit */ ) {
 				if ((VT100_TIMEOUT == key) &&
 					!this->timeout_fn(this))
 					continue;
