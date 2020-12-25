@@ -207,8 +207,7 @@ static bool_t clish_shell_tinyrl_key_space(tinyrl_t *this, int key)
 			}
 		}
 	}
-// Permit to press space in any cases
-//	if (result)
+	if (result)
 		result = tinyrl_insert_text(this, " ");
 	/* keep compiler happy */
 	key = key;
