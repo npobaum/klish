@@ -52,13 +52,7 @@ static bool_t clish_shell_tinyrl_key_help(tinyrl_t *this, int key)
 		/* if we are in the middle of a quote then simply enter a space */
 		result = tinyrl_insert_text(this, "?");
 	} else {
-		/* get the context */
-		clish_context_t *context = tinyrl__get_context(this);
-		clish_shell_t *shell = clish_context__get_shell(context);
-		tinyrl_crlf(this);
-		clish_shell_help(shell, tinyrl__get_line(this));
-		tinyrl_crlf(this);
-		tinyrl_reset_line_state(this);
+		clish_shell_print_help(this);
 	}
 	/* keep the compiler happy */
 	key = key;
@@ -186,6 +180,8 @@ static bool_t clish_shell_tinyrl_key_space(tinyrl_t *this, int key)
 			status = clish_shell_tinyrl_complete(this);
 			switch (status) {
 			case TINYRL_NO_MATCH:
+				/* try to print help if it's possible */
+				clish_shell_print_help(this);
 			case TINYRL_AMBIGUOUS:
 				/* ambiguous result signal an issue */
 				break;

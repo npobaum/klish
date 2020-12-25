@@ -165,4 +165,14 @@ end:
 	lub_argv_delete(help.detail);
 }
 
+void clish_shell_print_help(tinyrl_t *this)
+{
+	/* get the context */
+	clish_context_t *context = tinyrl__get_context(this);
+	clish_shell_t *shell = clish_context__get_shell(context);
+	tinyrl_crlf(this);
+	clish_shell_help(shell, tinyrl__get_line(this));
+	tinyrl_crlf(this);
+	tinyrl_reset_line_state(this);
+}
 /*--------------------------------------------------------- */

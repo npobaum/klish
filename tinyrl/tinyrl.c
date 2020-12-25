@@ -19,6 +19,7 @@
 #include "lub/string.h"
 
 #include "private.h"
+#include "clish/shell.h"
 
 /*-------------------------------------------------------- */
 static int utf8_wchar(const char *sp, unsigned long *sym_out)
@@ -637,6 +638,9 @@ static bool_t tinyrl_key_tab(tinyrl_t * this, int key)
 		result = tinyrl_insert_text(this, " ");
 		break;
 	case TINYRL_NO_MATCH:
+		/* try to print help if it's possible */
+		clish_shell_print_help(this);
+
 	case TINYRL_MATCH_WITH_EXTENSIONS:
 	case TINYRL_AMBIGUOUS:
 	case TINYRL_COMPLETED_AMBIGUOUS:
