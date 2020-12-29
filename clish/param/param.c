@@ -106,11 +106,9 @@ void clish_param_help(const clish_param_t * this, clish_help_t *help)
 		return;
 	}
 
-	if (CLISH_PARAM_SUBCOMMAND == clish_param__get_mode(this))
-		name = clish_param__get_value(this);
-	else
-		if (!(name = clish_ptype__get_text(this->ptype)))
-			name = clish_ptype__get_name(this->ptype);
+	name = (CLISH_PARAM_SUBCOMMAND == clish_param__get_mode(this))
+		? clish_param__get_value(this)
+		: clish_param__get_name(this);
 
 	lub_string_cat(&str, this->text);
 	if (range) {
