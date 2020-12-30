@@ -129,7 +129,6 @@ void clish_shell_help(clish_shell_t *this, const char *line)
 			max_width = width;
 		/* Add <cr> if command is completed */
 		if (!status) {
-			lub_argv_add(help.name, "<cr>");
 			lub_argv_add(help.help, NULL);
 			lub_argv_add(help.detail, NULL);
 		}
